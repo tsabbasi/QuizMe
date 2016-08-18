@@ -12,6 +12,11 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
+    // global variables
+    
+    var currentTrivia = generateTrivia()
+    
+    
     let questionsPerRound = 4
     var questionsAsked = 0
     var correctQuestions = 0
@@ -19,17 +24,22 @@ class ViewController: UIViewController {
     
     var gameSound: SystemSoundID = 0
     
-    let trivia: [[String : String]] = [
-        ["Question": "Only female koalas can whistle", "Answer": "False"],
-        ["Question": "Blue whales are technically whales", "Answer": "True"],
-        ["Question": "Camels are cannibalistic", "Answer": "False"],
-        ["Question": "All ducks are birds", "Answer": "True"]
-    ]
+//    let trivia: [[String : String]] = [
+//        ["Question": "Only female koalas can whistle", "Answer": "False"],
+//        ["Question": "Blue whales are technically whales", "Answer": "True"],
+//        ["Question": "Camels are cannibalistic", "Answer": "False"],
+//        ["Question": "All ducks are birds", "Answer": "True"]
+//    ]
     
     @IBOutlet weak var questionField: UILabel!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
+    @IBOutlet weak var option1Button: UIButton!
+    @IBOutlet weak var option2Button: UIButton!
+    @IBOutlet weak var option3Button: UIButton!
+    @IBOutlet weak var option4Button: UIButton!
+//    @IBOutlet weak var trueButton: UIButton!
+//    @IBOutlet weak var falseButton: UIButton!
     @IBOutlet weak var playAgainButton: UIButton!
+    
     
 
     override func viewDidLoad() {
@@ -37,7 +47,7 @@ class ViewController: UIViewController {
         loadGameStartSound()
         // Start game
         playGameStartSound()
-        displayQuestion()
+        questionField.text = currentTrivia.question
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,17 +55,27 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func displayQuestion() {
-        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextIntWithUpperBound(trivia.count)
-        let questionDictionary = trivia[indexOfSelectedQuestion]
-        questionField.text = questionDictionary["Question"]
-        playAgainButton.hidden = true
+//    func displayQuestion() {
+//        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextIntWithUpperBound(trivia.count)
+//        let questionDictionary = trivia[indexOfSelectedQuestion]
+//        questionField.text = questionDictionary["Question"]
+//        playAgainButton.hidden = true
+//    }
+    
+    func displayOptions() {
+        option1Button.setTitle(currentTrivia.options[0], forState: <#T##UIControlState#>)
+        option2Button.setTitle(currentTrivia.options[1], forState: <#T##UIControlState#>)
+        option3Button.setTitle(currentTrivia.options[2], forState: <#T##UIControlState#>)
+        option4Button.setTitle(currentTrivia.options[3], forState: <#T##UIControlState#>)
     }
     
-    func displayScore() {
+    func displayScore() { // unneccesary function -> can be combined with scoring logic (when calculated)
         // Hide the answer buttons
-        trueButton.hidden = true
-        falseButton.hidden = true
+        option1Button.hidden = true
+        option2Button.hidden = true
+        option3Button.hidden = true
+        option4Button.hidden = true
+        
         
         // Display play again button
         playAgainButton.hidden = false
@@ -63,15 +83,23 @@ class ViewController: UIViewController {
         questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
         
     }
+
+    
     
     @IBAction func checkAnswer(sender: UIButton) {
+        
         // Increment the questions asked counter
         questionsAsked += 1
         
-        let selectedQuestionDict = trivia[indexOfSelectedQuestion]
-        let correctAnswer = selectedQuestionDict["Answer"]
+        // Set correctAnswer to the current Trivia Set's answer
+        let correctAnswer = currentTrivia.answer
         
-        if (sender === trueButton &&  correctAnswer == "True") || (sender === falseButton && correctAnswer == "False") {
+        
+        // Check if selected option matches the answer
+        if (sender === option1Button &&  option1Button.titleLabel == correctAnswer) ||
+            (sender === option2Button && option2Button == correctAnswer) ||
+            (sender === option3Button && option3Button == correctAnswer) ||
+            (sender === option4Button && option4Button == correctAnswer) {
             correctQuestions += 1
             questionField.text = "Correct!"
         } else {
@@ -81,20 +109,48 @@ class ViewController: UIViewController {
         loadNextRoundWithDelay(seconds: 2)
     }
     
+    
+    
+    
+    
+//    @IBAction func checkAnswer(sender: UIButton) {
+//        // Increment the questions asked counter
+//        questionsAsked += 1
+//        
+//        let selectedQuestionDict = trivia[indexOfSelectedQuestion]
+//        let correctAnswer = selectedQuestionDict["Answer"]
+//        
+//        if (sender === trueButton &&  correctAnswer == "True") || (sender === falseButton && correctAnswer == "False") {
+//            correctQuestions += 1
+//            questionField.text = "Correct!"
+//        } else {
+//            questionField.text = "Sorry, wrong answer!"
+//        }
+//        
+//        loadNextRoundWithDelay(seconds: 2)
+//    }
+    
+    
+    
     func nextRound() {
         if questionsAsked == questionsPerRound {
             // Game is over
             displayScore()
         } else {
             // Continue game
-            displayQuestion()
+            
+            // Resetting current trivia
+            
+            currentTrivia = generateTrivia()
         }
     }
     
     @IBAction func playAgain() {
         // Show the answer buttons
-        trueButton.hidden = false
-        falseButton.hidden = false
+        option1Button.hidden = false
+        option2Button.hidden = false
+        option3Button.hidden = true
+        option4Button.hidden = true
         
         questionsAsked = 0
         correctQuestions = 0
