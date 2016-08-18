@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     var currentTrivia = generateTrivia()
     
     
-    let questionsPerRound = 4
+    let questionsPerRound = triviaCollection.count
     var questionsAsked = 0
     var correctQuestions = 0
     
@@ -120,8 +120,8 @@ class ViewController: UIViewController {
         // Show the answer buttons
         option1Button.hidden = false
         option2Button.hidden = false
-        option3Button.hidden = true
-        option4Button.hidden = true
+        option3Button.hidden = false
+        option4Button.hidden = false
         
         questionsAsked = 0
         correctQuestions = 0

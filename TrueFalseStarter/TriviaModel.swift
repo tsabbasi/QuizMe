@@ -8,7 +8,9 @@
 
 import GameKit
 
+// globalIndex
 var indexOfSelectedTriviaSet: Int = 0
+var usedTriviaSets = [Int]()
 
 
 
@@ -17,31 +19,6 @@ struct Trivia {
     let question: String
     var options: [String]
     let answer: String
-    
-//    init(question: String, options: [String], answer: String) {
-//        
-//        self.question = question
-//        self.options = options
-//        self.answer = answer
-//        
-//    }
-//    
-    
-    
-//    let questionsPerRound = 4
-//    var questionsAsked = 0
-//    var correctQuestions = 0
-    
-//
-//    
-//    let trivia: [[String : String]] = [
-//        ["Question": "Only female koalas can whistle", "Answer": "False"],
-//        ["Question": "Blue whales are technically whales", "Answer": "True"],
-//        ["Question": "Camels are cannibalistic", "Answer": "False"],
-//        ["Question": "All ducks are birds", "Answer": "True"]
-//    ]
-    
-    
     
 }
 
@@ -74,13 +51,35 @@ let triviaCollection = [triviaSet1, triviaSet2, triviaSet3, triviaSet4, triviaSe
 
 func generateTrivia() -> Trivia {
     
-    indexOfSelectedTriviaSet = GKRandomSource.sharedRandom().nextIntWithUpperBound(triviaCollection.count)
+    
+    // All Items in Trivia Collection Used
+    
+    if (usedTriviaSets.count == triviaCollection.count) {
+        
+        // Resetting array of usedTriviaSets
+        
+        usedTriviaSets.removeAll()
+    
+    } else if (usedTriviaSets.count == 0) {
+        
+        indexOfSelectedTriviaSet = GKRandomSource.sharedRandom().nextIntWithUpperBound(triviaCollection.count)
+        
+//        usedTriviaSets.append(indexOfSelectedTriviaSet)
+        
+    } else if (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
+        
+        while (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
+            
+            indexOfSelectedTriviaSet = GKRandomSource.sharedRandom().nextIntWithUpperBound(triviaCollection.count)
+        
+        }
+        
+    }
+    
+    usedTriviaSets.append(indexOfSelectedTriviaSet)
     let triviaSelection = triviaCollection[indexOfSelectedTriviaSet]
+    
     return triviaSelection
     
 }
-
-
-
-
 
