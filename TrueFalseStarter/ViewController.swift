@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var option2Button: UIButton!
     @IBOutlet weak var option3Button: UIButton!
     @IBOutlet weak var option4Button: UIButton!
+    @IBOutlet weak var nextQuestionButton: UIButton!
     @IBOutlet weak var playAgainButton: UIButton!
     
     
@@ -40,6 +41,7 @@ class ViewController: UIViewController {
         // Start game
         playGameStartSound()
         playAgainButton.hidden = true
+        nextQuestionButton.hidden = false
         questionField.text = currentTrivia.question
         displayOptions()
     }
@@ -57,18 +59,19 @@ class ViewController: UIViewController {
         option4Button.setTitle(currentTrivia.options[3], forState: .Normal)
     }
     
-    func displayScore() { // unneccesary function -> can be combined with scoring logic (when calculated)
+    func displayScore() { 
         // Hide the answer buttons
         option1Button.hidden = true
         option2Button.hidden = true
         option3Button.hidden = true
         option4Button.hidden = true
+        nextQuestionButton.hidden = true
         
         
         // Display play again button
         playAgainButton.hidden = false
         
-        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
+        questionField.text = "Woohoo!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
         
     }
 
@@ -90,31 +93,39 @@ class ViewController: UIViewController {
             
             correctQuestions += 1
             
+            resultField.textColor = UIColor.init(red: 21/255.0, green: 147/255.0, blue: 135/255.0, alpha: 1.0)
             resultField.text = "Correct!"
             
         } else {
+            resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
+            
             resultField.text = "Sorry, wrong answer!"
         }
         
-        loadNextRoundWithDelay(seconds: 2)
+//        loadNextRoundWithDelay(seconds: 2)
     }
     
+
     
-    func nextRound() {
+    
+    @IBAction func showNextQuestion() {
+        
         if questionsAsked == questionsPerRound {
             // Game is over
             resultField.text = ""
+            nextQuestionButton.hidden = true
             displayScore()
         } else {
             // Continue game
-            
             currentTrivia = generateTrivia()
             questionField.text = currentTrivia.question
             resultField.text = ""
             displayOptions()
             playAgainButton.hidden = true
         }
+            
     }
+    
     
     @IBAction func playAgain() {
         // Show the answer buttons
@@ -122,27 +133,29 @@ class ViewController: UIViewController {
         option2Button.hidden = false
         option3Button.hidden = false
         option4Button.hidden = false
+        nextQuestionButton.hidden = false
         
         questionsAsked = 0
         correctQuestions = 0
-        nextRound()
+        showNextQuestion()
+//        nextRound()
     }
     
 
     
     // MARK: Helper Methods
-    
-    func loadNextRoundWithDelay(seconds seconds: Int) {
-        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
-        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
-        // Calculates a time value to execute the method given current time and delay
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, delay)
-        
-        // Executes the nextRound method at the dispatch time on the main queue
-        dispatch_after(dispatchTime, dispatch_get_main_queue()) {
-            self.nextRound()
-        }
-    }
+//    
+//    func loadNextRoundWithDelay(seconds seconds: Int) {
+//        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
+//        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
+//        // Calculates a time value to execute the method given current time and delay
+//        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, delay)
+//        
+//        // Executes the nextRound method at the dispatch time on the main queue
+//        dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+////            self.nextRound()
+//        }
+//    }
     
     func loadGameStartSound() {
         let pathToSoundFile = NSBundle.mainBundle().pathForResource("GameSound", ofType: "wav")
