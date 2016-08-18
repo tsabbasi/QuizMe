@@ -80,15 +80,7 @@ func generateTrivia() -> Trivia {
     
 }
 
-//struct TriviaSet {
-//    let triviaQuestion: String = generateTrivia().question
-//    let triviaOptions: [String]
-//    let triviaAnswer: String
-//    
-//    init(triviaQuestion: String, triviaOptions: [String], triviaAnswer: String)
-//    
-//    
-//}
+
 
 
 

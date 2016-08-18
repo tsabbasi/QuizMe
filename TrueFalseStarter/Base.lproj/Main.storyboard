@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample Question" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3V-ih-1Ky">
-                                <rect key="frame" x="40" y="80" width="520" height="19.5"/>
+                                <rect key="frame" x="40" y="55" width="520" height="19.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -34,6 +34,9 @@
                                 <state key="normal" title="Option1">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkAnswer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YnV-L5-hqY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kd9-6j-fcq">
                                 <rect key="frame" x="40" y="228" width="520" height="40"/>
@@ -45,6 +48,9 @@
                                 <state key="normal" title="Option2">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkAnswer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I9f-20-7tj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMW-Rb-ROs">
                                 <rect key="frame" x="40" y="288" width="520" height="40"/>
@@ -56,6 +62,9 @@
                                 <state key="normal" title="Option3">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkAnswer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZhX-Ih-tuq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMN-N3-dKI">
                                 <rect key="frame" x="40" y="348" width="520" height="40"/>
@@ -66,6 +75,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Option4"/>
+                                <connections>
+                                    <action selector="checkAnswer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9gb-KM-68k"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K17-uy-MvB">
                                 <rect key="frame" x="40" y="428" width="520" height="50"/>
@@ -80,6 +92,12 @@
                                     <action selector="playAgain" destination="BYZ-38-t0r" eventType="touchUpInside" id="klz-B2-JAN"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HG-8H-YN5">
+                                <rect key="frame" x="40" y="94.5" width="520" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.031372549019607843" green="0.16862745098039217" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -89,29 +107,38 @@
                             <constraint firstItem="RMW-Rb-ROs" firstAttribute="top" secondItem="Kd9-6j-fcq" secondAttribute="bottom" constant="20" id="6ku-NP-gco"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Kd9-6j-fcq" secondAttribute="trailing" constant="20" id="9oD-fW-gYq"/>
                             <constraint firstItem="zxw-qO-1TL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="148" id="Adh-fm-k5Q"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="K17-uy-MvB" secondAttribute="bottom" constant="122" id="F20-Ae-oRn"/>
                             <constraint firstItem="jMN-N3-dKI" firstAttribute="top" secondItem="RMW-Rb-ROs" secondAttribute="bottom" constant="20" id="GwI-oD-6Sy"/>
-                            <constraint firstItem="K17-uy-MvB" firstAttribute="top" secondItem="jMN-N3-dKI" secondAttribute="bottom" constant="40" id="Gye-CZ-aHq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="K17-uy-MvB" secondAttribute="trailing" constant="20" id="Iu7-Im-t5z"/>
+                            <constraint firstItem="9HG-8H-YN5" firstAttribute="top" secondItem="I3V-ih-1Ky" secondAttribute="bottom" constant="20" id="JAY-Gb-E58"/>
                             <constraint firstItem="jMN-N3-dKI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="K1I-VQ-Jt1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zxw-qO-1TL" secondAttribute="trailing" constant="20" id="L0H-nP-2XM"/>
                             <constraint firstItem="zxw-qO-1TL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="PdA-3I-SkY"/>
                             <constraint firstItem="K17-uy-MvB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="QeU-y5-XEE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="I3V-ih-1Ky" secondAttribute="trailing" constant="20" id="SPw-jL-9KR"/>
                             <constraint firstItem="Kd9-6j-fcq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="XkO-kQ-VVe"/>
+                            <constraint firstItem="I3V-ih-1Ky" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="35" id="bQh-yL-8hv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9HG-8H-YN5" secondAttribute="trailing" constant="20" id="crC-Lc-6X1"/>
                             <constraint firstItem="I3V-ih-1Ky" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="eQY-2E-amK"/>
+                            <constraint firstItem="9HG-8H-YN5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="qGv-L3-UUD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jMN-N3-dKI" secondAttribute="trailing" constant="20" id="uOf-FF-w8E"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RMW-Rb-ROs" secondAttribute="trailing" constant="20" id="yw7-wR-ljp"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0EN-2d-Odt"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
-                        <outlet property="option1" destination="zxw-qO-1TL" id="MbU-7B-Okd"/>
                         <outlet property="option1Button" destination="zxw-qO-1TL" id="41E-9L-Cej"/>
                         <outlet property="option2Button" destination="Kd9-6j-fcq" id="AZ5-rk-zGY"/>
                         <outlet property="option3Button" destination="RMW-Rb-ROs" id="SKf-Du-woW"/>
                         <outlet property="option4Button" destination="jMN-N3-dKI" id="AXt-ek-MRy"/>
                         <outlet property="playAgainButton" destination="K17-uy-MvB" id="0Bx-Cm-ye0"/>
                         <outlet property="questionField" destination="I3V-ih-1Ky" id="7UI-o2-ATi"/>
+                        <outlet property="resultField" destination="9HG-8H-YN5" id="8HI-28-EBh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
