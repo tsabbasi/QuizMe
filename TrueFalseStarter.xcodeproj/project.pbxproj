@@ -13,6 +13,10 @@
 		97093D431C913506001275BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97093D421C913506001275BC /* Assets.xcassets */; };
 		97093D461C913506001275BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97093D441C913506001275BC /* LaunchScreen.storyboard */; };
 		97093D531C932116001275BC /* GameSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97093D521C932116001275BC /* GameSound.wav */; };
+		C43A5D261D668AF500F6F2DD /* uhOh.wav in Resources */ = {isa = PBXBuildFile; fileRef = C43A5D251D668AF500F6F2DD /* uhOh.wav */; };
+		C43A5D281D668B0900F6F2DD /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = C43A5D271D668B0900F6F2DD /* correct.wav */; };
+		C43A5D2A1D66920E00F6F2DD /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = C43A5D291D66920E00F6F2DD /* lose.wav */; };
+		C4A2C9E51D66945100DDDE43 /* GameSoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A2C9E41D66945100DDDE43 /* GameSoundModel.swift */; };
 		C4E1947B1D64DAE0008B4949 /* TriviaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E1947A1D64DAE0008B4949 /* TriviaModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +29,10 @@
 		97093D451C913506001275BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97093D471C913506001275BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97093D521C932116001275BC /* GameSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameSound.wav; sourceTree = "<group>"; };
+		C43A5D251D668AF500F6F2DD /* uhOh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = uhOh.wav; sourceTree = "<group>"; };
+		C43A5D271D668B0900F6F2DD /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
+		C43A5D291D66920E00F6F2DD /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
+		C4A2C9E41D66945100DDDE43 /* GameSoundModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSoundModel.swift; sourceTree = "<group>"; };
 		C4E1947A1D64DAE0008B4949 /* TriviaModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriviaModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,9 +71,13 @@
 				97093D3F1C913506001275BC /* Main.storyboard */,
 				97093D421C913506001275BC /* Assets.xcassets */,
 				97093D441C913506001275BC /* LaunchScreen.storyboard */,
+				C43A5D251D668AF500F6F2DD /* uhOh.wav */,
+				C43A5D291D66920E00F6F2DD /* lose.wav */,
+				C43A5D271D668B0900F6F2DD /* correct.wav */,
 				97093D471C913506001275BC /* Info.plist */,
 				97093D521C932116001275BC /* GameSound.wav */,
 				C4E1947A1D64DAE0008B4949 /* TriviaModel.swift */,
+				C4A2C9E41D66945100DDDE43 /* GameSoundModel.swift */,
 			);
 			path = TrueFalseStarter;
 			sourceTree = "<group>";
@@ -128,10 +140,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C43A5D261D668AF500F6F2DD /* uhOh.wav in Resources */,
 				97093D531C932116001275BC /* GameSound.wav in Resources */,
 				97093D461C913506001275BC /* LaunchScreen.storyboard in Resources */,
+				C43A5D2A1D66920E00F6F2DD /* lose.wav in Resources */,
 				97093D431C913506001275BC /* Assets.xcassets in Resources */,
 				97093D411C913506001275BC /* Main.storyboard in Resources */,
+				C43A5D281D668B0900F6F2DD /* correct.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +160,7 @@
 				97093D3E1C913506001275BC /* ViewController.swift in Sources */,
 				C4E1947B1D64DAE0008B4949 /* TriviaModel.swift in Sources */,
 				97093D3C1C913506001275BC /* AppDelegate.swift in Sources */,
+				C4A2C9E51D66945100DDDE43 /* GameSoundModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

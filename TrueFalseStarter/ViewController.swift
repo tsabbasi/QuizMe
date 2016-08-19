@@ -16,12 +16,11 @@ class ViewController: UIViewController {
     
     var currentTrivia = generateTrivia()
     
-    
+    var gameSounds = GameSoundModel()
+  
     let questionsPerRound = triviaCollection.count
     var questionsAsked = 0
     var correctQuestions = 0
-    
-    var gameSound: SystemSoundID = 0
     
     
     @IBOutlet weak var questionField: UILabel!
@@ -32,16 +31,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var option4Button: UIButton!
     @IBOutlet weak var nextQuestionButton: UIButton!
     @IBOutlet weak var playAgainButton: UIButton!
+    @IBOutlet weak var showAnswerButton: UIButton!
     
-    
+ 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadGameStartSound()
+        gameSounds.loadCorrectAnswerSound()
+        gameSounds.loadIncorrectAnswerSound()
         // Start game
-        playGameStartSound()
+//        playGameStartSound()
         playAgainButton.hidden = true
         nextQuestionButton.hidden = false
+        showAnswerButton.hidden = true
         questionField.text = currentTrivia.question
         displayOptions()
     }
@@ -51,30 +53,6 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    func displayOptions() {
-        option1Button.setTitle(currentTrivia.options[0], forState: .Normal)
-        option2Button.setTitle(currentTrivia.options[1], forState: .Normal)
-        option3Button.setTitle(currentTrivia.options[2], forState: .Normal)
-        option4Button.setTitle(currentTrivia.options[3], forState: .Normal)
-    }
-    
-    func displayScore() { 
-        // Hide the answer buttons
-        option1Button.hidden = true
-        option2Button.hidden = true
-        option3Button.hidden = true
-        option4Button.hidden = true
-        nextQuestionButton.hidden = true
-        
-        
-        // Display play again button
-        playAgainButton.hidden = false
-        
-        questionField.text = "Woohoo!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
-        
-    }
-
     
     @IBAction func checkAnswer(sender: UIButton) {
         
@@ -90,24 +68,50 @@ class ViewController: UIViewController {
             (sender === option2Button && option2Button.currentTitle == correctAnswer) ||
             (sender === option3Button && option3Button.currentTitle == correctAnswer) ||
             (sender === option4Button && option4Button.currentTitle == correctAnswer) {
+            gameSounds.playCorrectAnswerSound()
             
             correctQuestions += 1
             
             resultField.textColor = UIColor.init(red: 21/255.0, green: 147/255.0, blue: 135/255.0, alpha: 1.0)
             resultField.text = "Correct!"
+            showAnswerButton.hidden = true
             
         } else {
+            gameSounds.playInorrectAnswerSound()
             resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
             
-            resultField.text = "Sorry, wrong answer!"
+            resultField.text = "Sorry, wrong answer."
+            showAnswerButton.hidden = false
+            hideOptionButtons(true)
         }
         
-//        loadNextRoundWithDelay(seconds: 2)
     }
     
-
     
     
+    @IBAction func showAnswer() {
+        showAnswerButton.hidden = true
+        
+        let options: [UIButton] = [option1Button, option2Button, option3Button, option4Button]
+        
+        for option in options {
+            
+            option.hidden = false
+            option.highlighted = true
+            
+            if option.currentTitle == currentTrivia.answer {
+                
+                resultField.text = "The correct answer was:"
+                
+                option.highlighted = false
+                
+                option.selected = true
+            }
+        }
+    }
+    
+    
+ 
     @IBAction func showNextQuestion() {
         
         if questionsAsked == questionsPerRound {
@@ -118,6 +122,7 @@ class ViewController: UIViewController {
         } else {
             // Continue game
             currentTrivia = generateTrivia()
+            showAnswerButton.hidden = true
             questionField.text = currentTrivia.question
             resultField.text = ""
             displayOptions()
@@ -129,42 +134,70 @@ class ViewController: UIViewController {
     
     @IBAction func playAgain() {
         // Show the answer buttons
-        option1Button.hidden = false
-        option2Button.hidden = false
-        option3Button.hidden = false
-        option4Button.hidden = false
+        hideOptionButtons(false)
         nextQuestionButton.hidden = false
         
         questionsAsked = 0
         correctQuestions = 0
         showNextQuestion()
-//        nextRound()
+
+    }
+    
+//    func didPlayerWin() {
+//        let playerLost = questionsPerRound / 2
+//        if (correctQuestions <= playerLost) {
+//            
+//        }
+//    }
+    
+
+    
+    func displayOptions() {
+        option1Button.setTitle(currentTrivia.options[0], forState: .Normal)
+        option2Button.setTitle(currentTrivia.options[1], forState: .Normal)
+        option3Button.setTitle(currentTrivia.options[2], forState: .Normal)
+        option4Button.setTitle(currentTrivia.options[3], forState: .Normal)
+        
+        hideOptionButtons(false)
+        
+        resetOptionButtonDisplay()
+        
+    }
+    
+    func displayScore() {
+        // Hide the answer buttons
+        hideOptionButtons(true)
+        nextQuestionButton.hidden = true
+        showAnswerButton.hidden = true
+        
+        
+        // Display play again button
+        playAgainButton.hidden = false
+        
+        questionField.text = "Woohoo!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
+        
     }
     
 
     
     // MARK: Helper Methods
-//    
-//    func loadNextRoundWithDelay(seconds seconds: Int) {
-//        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
-//        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
-//        // Calculates a time value to execute the method given current time and delay
-//        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, delay)
-//        
-//        // Executes the nextRound method at the dispatch time on the main queue
-//        dispatch_after(dispatchTime, dispatch_get_main_queue()) {
-////            self.nextRound()
-//        }
-//    }
     
-    func loadGameStartSound() {
-        let pathToSoundFile = NSBundle.mainBundle().pathForResource("GameSound", ofType: "wav")
-        let soundURL = NSURL(fileURLWithPath: pathToSoundFile!)
-        AudioServicesCreateSystemSoundID(soundURL, &gameSound)
+    func hideOptionButtons(boolean: Bool) {
+        let options: [UIButton] = [option1Button, option2Button, option3Button, option4Button]
+        for option in options {
+            option.hidden = boolean
+        }
     }
     
-    func playGameStartSound() {
-        AudioServicesPlaySystemSound(gameSound)
+    func resetOptionButtonDisplay() {
+        let options: [UIButton] = [option1Button, option2Button, option3Button, option4Button]
+        for option in options {
+            
+            option.highlighted = false
+            option.selected = false
+        }
+        
     }
+
 }
 
