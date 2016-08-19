@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var nextQuestionButton: UIButton!
     @IBOutlet weak var playAgainButton: UIButton!
     @IBOutlet weak var showAnswerButton: UIButton!
+    @IBOutlet weak var displayScoreLabel: UILabel!
     
  
 
@@ -135,6 +136,7 @@ class ViewController: UIViewController {
     @IBAction func playAgain() {
         // Show the answer buttons
         hideOptionButtons(false)
+        displayScoreLabel.text = ""
         nextQuestionButton.hidden = false
         
         questionsAsked = 0
@@ -143,12 +145,26 @@ class ViewController: UIViewController {
 
     }
     
-//    func didPlayerWin() {
-//        let playerLost = questionsPerRound / 2
-//        if (correctQuestions <= playerLost) {
-//            
-//        }
-//    }
+    func didPlayerWin() {
+        
+        let playerLost = questionsPerRound / 2
+        
+        if (correctQuestions == questionsPerRound) {
+            
+            displayScoreLabel.text = "WOOHOO!! You Won!"
+        
+        } else if (correctQuestions <= playerLost) {
+            
+//            gameSounds.playGameOverSound()
+        
+            displayScoreLabel.text = "Sorry, you only got \(correctQuestions) out of \(questionsPerRound) correct.\n Better luck next time!"
+        
+        } else {
+        
+            displayScoreLabel.text = "Nice! You got \(correctQuestions) out of \(questionsPerRound) correct!"
+        }
+        
+    }
     
 
     
@@ -174,7 +190,9 @@ class ViewController: UIViewController {
         // Display play again button
         playAgainButton.hidden = false
         
-        questionField.text = "Woohoo!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
+        didPlayerWin()
+        
+//        questionField.text = "Woohoo!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
         
     }
     
