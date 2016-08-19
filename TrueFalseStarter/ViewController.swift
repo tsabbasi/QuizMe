@@ -12,6 +12,10 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
+    var countdown = 15
+    
+    var timer = NSTimer()
+    
     // global variables
     
     var currentTrivia = generateTrivia()
@@ -33,6 +37,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var playAgainButton: UIButton!
     @IBOutlet weak var showAnswerButton: UIButton!
     @IBOutlet weak var displayScoreLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
     
  
 
@@ -47,6 +52,7 @@ class ViewController: UIViewController {
         showAnswerButton.hidden = true
         questionField.text = currentTrivia.question
         displayOptions()
+        startTimer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,7 +68,6 @@ class ViewController: UIViewController {
         
         // Set correctAnswer to the current Trivia Set's answer
         let correctAnswer = currentTrivia.answer
-        
         
         // Check if selected option matches the answer
         if (sender === option1Button &&  option1Button.currentTitle == correctAnswer) ||
@@ -81,7 +86,7 @@ class ViewController: UIViewController {
             gameSounds.playInorrectAnswerSound()
             resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
             
-            resultField.text = "Sorry, wrong answer."
+            resultField.text = "Uh oh, wrong answer!"
             showAnswerButton.hidden = false
             hideOptionButtons(true)
         }
@@ -119,15 +124,18 @@ class ViewController: UIViewController {
             // Game is over
             resultField.text = ""
             nextQuestionButton.hidden = true
+            timerLabel.hidden = true
             displayScore()
         } else {
             // Continue game
             currentTrivia = generateTrivia()
-            showAnswerButton.hidden = true
             questionField.text = currentTrivia.question
             resultField.text = ""
             displayOptions()
             playAgainButton.hidden = true
+            showAnswerButton.hidden = true
+            resetTimer()
+            startTimer()
         }
             
     }
@@ -142,8 +150,44 @@ class ViewController: UIViewController {
         questionsAsked = 0
         correctQuestions = 0
         showNextQuestion()
+        startTimer()
 
     }
+    
+    
+    func startTimer() {
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+    }
+    
+    
+    func timerAction() {
+        
+        if (countdown > 0) {
+            countdown -= 1
+                timerLabel.text = "\(countdown)"
+        } else {
+            timesUp()
+        }
+        
+    }
+    
+    
+    func resetTimer() {
+        timer.invalidate()
+        countdown = 15
+        timerLabel.text = "15"
+    }
+    
+    func timesUp() {
+            questionsAsked += 1
+            hideOptionButtons(true)
+            showAnswerButton.hidden = true
+            resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
+            resultField.text = "Sorry, you ran out of time!"
+            
+    }
+
     
     func didPlayerWin() {
         
