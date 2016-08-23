@@ -8,20 +8,29 @@
 
 import GameKit
 
+// global variables
+
 var indexOfSelectedTriviaSet: Int = 0
+
 var usedTriviaSets = [Int]()
+
 var count: Int = 0
 
 
 
 struct Trivia {
     
+    // Each Trivia consists of these items.
+    
     let question: String
+    
     var options: [String]
+    
     let answer: String
     
 }
 
+// Trivia Instances
 
 let triviaSet1 = Trivia(question: "This was the only US President to serve more than two consecutive terms.", options: ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"], answer: "Franklin D. Roosevelt")
 
@@ -43,43 +52,48 @@ let triviaSet9 = Trivia(question: "Which country was the first to allow women to
 
 let triviaSet10 = Trivia(question: "Which of these countries won the most medals in the 2012 Summer Games?", options: ["France", "Germany", "Japan", "Great Britian"], answer: "Great Britian")
 
+
+// Collection of Trivia Instances
+
 let triviaCollection = [triviaSet1, triviaSet2, triviaSet3, triviaSet4, triviaSet5, triviaSet6, triviaSet7, triviaSet8, triviaSet9, triviaSet10]
 
 
 
-// This function randomly selects and returns a trivia set from the triviaCollection array
+// This function randomly selects and returns a Trivia Set from the triviaCollection array
 
 func generateTrivia() -> Trivia {
     
     count += 1
     
+    // Resetting array of usedTriviaSets
+    
     if (usedTriviaSets.count == triviaCollection.count) {
-        
-        // Resetting array of usedTriviaSets
-        
+
         usedTriviaSets.removeAll()
+        
         count = 0
     
+    // Trivia generated before AND after app loads — this condition avoids generation of an extra question
+        
     } else if (count == 2 && usedTriviaSets.count == 1) {
         
         usedTriviaSets.removeAll()
         ()
+        
+    // This condition checks against indexes already used to generate a new random number
         
     } else if (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
         
         while (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
             
             indexOfSelectedTriviaSet = GKRandomSource.sharedRandom().nextIntWithUpperBound(triviaCollection.count)
-            
         }
-        
     }
     
     usedTriviaSets.append(indexOfSelectedTriviaSet)
+    
     let triviaSelection = triviaCollection[indexOfSelectedTriviaSet]
-    print(usedTriviaSets)
     
     return triviaSelection
-    
 }
 

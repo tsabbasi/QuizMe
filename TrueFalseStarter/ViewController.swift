@@ -12,21 +12,20 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
-    var countdown = 15
-    
-    var timer = NSTimer()
-    
-    // global variables
-    
-    var currentTrivia = generateTrivia()
-    
-    var gameSounds = GameSoundModel()
-  
+    // Tracking variables
+    var counter = 15
     let questionsPerRound = triviaCollection.count
     var questionsAsked = 0
-    var correctQuestions = 0
+    var correctAnswers = 0
     
     
+    // Class Variables
+    var timer = NSTimer()
+    var currentTrivia = generateTrivia()
+    var gameSounds = GameSoundModel()
+  
+    
+    // Outlets from storyboard
     @IBOutlet weak var questionField: UILabel!
     @IBOutlet weak var resultField: UILabel!
     @IBOutlet weak var option1Button: UIButton!
@@ -39,23 +38,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var displayScoreLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
- 
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Prep
         gameSounds.loadCorrectAnswerSound()
         gameSounds.loadIncorrectAnswerSound()
+        gameSounds.loadGameOverSound()
+        gameSounds.loadWinnerSound()
+        
         // Start game
-//        playGameStartSound()
-//        playAgainButton.hidden = true
-//        nextQuestionButton.hidden = false
-//        showAnswerButton.hidden = true
-//        questionField.text = currentTrivia.question
-//        displayOptions()
-//        startTimer()
         self.showNextQuestion()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -70,41 +68,40 @@ class ViewController: UIViewController {
         // Set correctAnswer to the current Trivia Set's answer
         let correctAnswer = currentTrivia.answer
         
-//        if (sender === nextQuestionButton && countdown == 0) {
-//            resetTimer()
-//            currentTrivia = generateTrivia()
-//        } else
         resetTimer()
         
         // Check if selected option matches the answer
+        
         if (sender === option1Button &&  option1Button.currentTitle == correctAnswer) ||
             (sender === option2Button && option2Button.currentTitle == correctAnswer) ||
             (sender === option3Button && option3Button.currentTitle == correctAnswer) ||
             (sender === option4Button && option4Button.currentTitle == correctAnswer) {
+            
+            // Correct Answer
             gameSounds.playCorrectAnswerSound()
-            
-            correctQuestions += 1
-            
+            correctAnswers += 1
             resultField.textColor = UIColor.init(red: 21/255.0, green: 147/255.0, blue: 135/255.0, alpha: 1.0)
             resultField.text = "Correct!"
             showAnswerButton.hidden = true
             
         } else {
+            
+            // Incorrect Answer
             gameSounds.playInorrectAnswerSound()
             resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
-            
             resultField.text = "Uh oh, wrong answer!"
+            timerLabel.hidden = true
             showAnswerButton.hidden = false
             hideOptionButtons(true)
         }
-        
     }
     
     
+    // This function allows user to view answer if they answered incorrectly (Optional)
     
     @IBAction func showAnswer() {
-        showAnswerButton.hidden = true
         
+        showAnswerButton.hidden = true
         let options: [UIButton] = [option1Button, option2Button, option3Button, option4Button]
         
         for option in options {
@@ -115,26 +112,28 @@ class ViewController: UIViewController {
             if option.currentTitle == currentTrivia.answer {
                 
                 resultField.text = "The correct answer was:"
-                
                 option.highlighted = false
-                
                 option.selected = true
             }
         }
     }
     
     
- 
+    // This function handles continuation of the game
+    
     @IBAction func showNextQuestion() {
         
         if questionsAsked == questionsPerRound {
+            
             // Game is over
             resultField.text = ""
             nextQuestionButton.hidden = true
             timerLabel.hidden = true
             displayScore()
-            // Continue game
+            
         } else {
+            
+            // Continue game
             currentTrivia = generateTrivia()
             questionField.text = currentTrivia.question
             resultField.text = ""
@@ -143,56 +142,76 @@ class ViewController: UIViewController {
             showAnswerButton.hidden = true
             startTimer()
         }
-            
     }
     
     
+    
+    // This function resets all game setting and starts a new round automatically
+    
     @IBAction func playAgain() {
-        // Show the answer buttons
+        
+        // resetting display settings
         hideOptionButtons(false)
         displayScoreLabel.text = ""
         nextQuestionButton.hidden = false
-        timerLabel.hidden = false
         
+        // resetting tracking settings along w/ timer
         questionsAsked = 0
-        correctQuestions = 0
+        correctAnswers = 0
         resetTimer()
-//        questionField.text = currentTrivia.question
+        
+        // starting new game
         self.showNextQuestion()
-//        startTimer()
-
     }
+    
     
     
     func startTimer() {
         
         timerLabel.hidden = false
         timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-        
     }
     
+    
+    // This function acts as a counter — utilized by the startTimer function
     
     func timerAction() {
         
-        if (countdown > 0) {
-            countdown -= 1
-                timerLabel.text = "\(countdown)"
+        if (counter > 0) {
+            
+            // There is still time! Keep Decrementing!
+            counter -= 1
+            timerLabel.text = "\(counter)"
+            
         } else {
+            
+            // No More Time! Stop Timer!
+            gameSounds.playInorrectAnswerSound()
             timesUp()
             resetTimer()
-//            self.showNextQuestion()
         }
-        
     }
     
     
+    // MARK: Helper Methods
+    
+    
+    // This function stops timer, resets the counter and the label
+    
     func resetTimer() {
+        
         timer.invalidate()
-        countdown = 15
+        counter = 15
         timerLabel.text = "15"
     }
     
+    
+    
+    // This function will stop timer and notify user of time running out.
+    
     func timesUp() {
+        
+        // Question marked as wrong
         questionsAsked += 1
         timer.invalidate()
         hideOptionButtons(true)
@@ -200,95 +219,89 @@ class ViewController: UIViewController {
         showAnswerButton.hidden = true
         resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
         resultField.text = "Sorry, you ran out of time!"
-            
     }
 
+    
+    // This function notifies user if they won or lost
     
     func didPlayerWin() {
         
-        let playerLost = questionsPerRound / 2
+        let incorrectAnswersLimit = questionsPerRound / 2
         
-        if (correctQuestions == questionsPerRound) {
+        if (correctAnswers == questionsPerRound) {
             
-            displayScoreLabel.text = "WOOHOO!! You Won!"
+            // Perfect Score
+            gameSounds.playWinnerSound()
+            displayScoreLabel.text = "WOOHOO!! You won. You are a champion!"
         
-        } else if (correctQuestions <= playerLost) {
+        } else if (correctAnswers <= incorrectAnswersLimit) {
             
-//            gameSounds.playGameOverSound()
-        
-            displayScoreLabel.text = "Sorry, you only got \(correctQuestions) out of \(questionsPerRound) correct.\n Better luck next time!"
+            // User Failed
+            gameSounds.playGameOverSound()
+            displayScoreLabel.text = "Sorry, you only got \(correctAnswers) out of \(questionsPerRound) correct.\n Better luck next time!"
         
         } else {
-        
-            displayScoreLabel.text = "Nice! You got \(correctQuestions) out of \(questionsPerRound) correct!"
+            
+            // User Passed
+            gameSounds.playWinnerSound()
+            displayScoreLabel.text = "Nice! You got \(correctAnswers) out of \(questionsPerRound) correct!"
         }
-        
     }
     
-
+    
+    
+    // This function controls the display of the Option Buttons
     
     func displayOptions() {
+        
         option1Button.setTitle(currentTrivia.options[0], forState: .Normal)
         option2Button.setTitle(currentTrivia.options[1], forState: .Normal)
         option3Button.setTitle(currentTrivia.options[2], forState: .Normal)
         option4Button.setTitle(currentTrivia.options[3], forState: .Normal)
         
         hideOptionButtons(false)
-        
         resetOptionButtonDisplay()
-        
     }
     
+    
+    // This displays user's final score once game ends
+    
     func displayScore() {
-        // Hide the answer buttons
+        
+        // Hide all buttons
         hideOptionButtons(true)
         nextQuestionButton.hidden = true
         showAnswerButton.hidden = true
         
-        // Display play again button
+        // Display Play Again button
         playAgainButton.hidden = false
         
+        // Calls function to Display Results
         didPlayerWin()
         
     }
-    
 
     
-    // MARK: Helper Methods
-//    
-//    func loadNextRoundWithDelay(seconds seconds: Int) {
-//        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
-//        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
-//        // Calculates a time value to execute the method given current time and delay
-//        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, delay)
-//    
-//        // Executes the nextRound method at the dispatch time on the main queue
-//        dispatch_after(dispatchTime, dispatch_get_main_queue()) {
-//            self.questionsAsked += 1
-//            self.hideOptionButtons(true)
-//            self.showAnswerButton.hidden = true
-//            self.resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
-//            self.resultField.text = "Sorry, you ran out of time!"
-////            self.showNextQuestion()
-//        }
-//    }
-    
     func hideOptionButtons(boolean: Bool) {
+        
         let options: [UIButton] = [option1Button, option2Button, option3Button, option4Button]
+        
         for option in options {
+            
             option.hidden = boolean
         }
     }
     
+    
     func resetOptionButtonDisplay() {
+        
         let options: [UIButton] = [option1Button, option2Button, option3Button, option4Button]
+        
         for option in options {
             
             option.highlighted = false
             option.selected = false
         }
-        
     }
-
 }
 
