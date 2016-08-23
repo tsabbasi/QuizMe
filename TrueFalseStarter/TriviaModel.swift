@@ -8,7 +8,6 @@
 
 import GameKit
 
-// globalIndex
 var indexOfSelectedTriviaSet: Int = 0
 var usedTriviaSets = [Int]()
 var count: Int = 0
@@ -46,22 +45,25 @@ let triviaSet10 = Trivia(question: "Which of these countries won the most medals
 
 let triviaCollection = [triviaSet1, triviaSet2, triviaSet3, triviaSet4, triviaSet5, triviaSet6, triviaSet7, triviaSet8, triviaSet9, triviaSet10]
 
+
+
 // This function randomly selects and returns a trivia set from the triviaCollection array
 
-
-
 func generateTrivia() -> Trivia {
-//    count += 1
     
-//    if (count == 1 && usedTriviaSets.count == 1) {
-//        usedTriviaSets.removeAll()
+    count += 1
     
     if (usedTriviaSets.count == triviaCollection.count) {
         
         // Resetting array of usedTriviaSets
         
         usedTriviaSets.removeAll()
-//        count = 0
+        count = 0
+    
+    } else if (count == 2 && usedTriviaSets.count == 1) {
+        
+        usedTriviaSets.removeAll()
+        ()
         
     } else if (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
         
@@ -70,9 +72,6 @@ func generateTrivia() -> Trivia {
             indexOfSelectedTriviaSet = GKRandomSource.sharedRandom().nextIntWithUpperBound(triviaCollection.count)
             
         }
-        
-//        usedTriviaSets.append(indexOfSelectedTriviaSet)
-//        let triviaSelection = triviaCollection[indexOfSelectedTriviaSet]
         
     }
     
