@@ -47,12 +47,13 @@ class ViewController: UIViewController {
         gameSounds.loadIncorrectAnswerSound()
         // Start game
 //        playGameStartSound()
-        playAgainButton.hidden = true
-        nextQuestionButton.hidden = false
-        showAnswerButton.hidden = true
-        questionField.text = currentTrivia.question
-        displayOptions()
-        startTimer()
+//        playAgainButton.hidden = true
+//        nextQuestionButton.hidden = false
+//        showAnswerButton.hidden = true
+//        questionField.text = currentTrivia.question
+//        displayOptions()
+//        startTimer()
+        self.showNextQuestion()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +69,12 @@ class ViewController: UIViewController {
         
         // Set correctAnswer to the current Trivia Set's answer
         let correctAnswer = currentTrivia.answer
+        
+//        if (sender === nextQuestionButton && countdown == 0) {
+//            resetTimer()
+//            currentTrivia = generateTrivia()
+//        } else
+        resetTimer()
         
         // Check if selected option matches the answer
         if (sender === option1Button &&  option1Button.currentTitle == correctAnswer) ||
@@ -126,15 +133,14 @@ class ViewController: UIViewController {
             nextQuestionButton.hidden = true
             timerLabel.hidden = true
             displayScore()
-        } else {
             // Continue game
+        } else {
             currentTrivia = generateTrivia()
             questionField.text = currentTrivia.question
             resultField.text = ""
             displayOptions()
             playAgainButton.hidden = true
             showAnswerButton.hidden = true
-            resetTimer()
             startTimer()
         }
             
@@ -146,18 +152,23 @@ class ViewController: UIViewController {
         hideOptionButtons(false)
         displayScoreLabel.text = ""
         nextQuestionButton.hidden = false
+        timerLabel.hidden = false
         
         questionsAsked = 0
         correctQuestions = 0
-        showNextQuestion()
-        startTimer()
+        resetTimer()
+//        questionField.text = currentTrivia.question
+        self.showNextQuestion()
+//        startTimer()
 
     }
     
     
     func startTimer() {
         
+        timerLabel.hidden = false
         timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        
     }
     
     
@@ -168,6 +179,8 @@ class ViewController: UIViewController {
                 timerLabel.text = "\(countdown)"
         } else {
             timesUp()
+            resetTimer()
+//            self.showNextQuestion()
         }
         
     }
@@ -180,11 +193,13 @@ class ViewController: UIViewController {
     }
     
     func timesUp() {
-            questionsAsked += 1
-            hideOptionButtons(true)
-            showAnswerButton.hidden = true
-            resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
-            resultField.text = "Sorry, you ran out of time!"
+        questionsAsked += 1
+        timer.invalidate()
+        hideOptionButtons(true)
+        timerLabel.hidden = true
+        showAnswerButton.hidden = true
+        resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
+        resultField.text = "Sorry, you ran out of time!"
             
     }
 
@@ -230,19 +245,33 @@ class ViewController: UIViewController {
         nextQuestionButton.hidden = true
         showAnswerButton.hidden = true
         
-        
         // Display play again button
         playAgainButton.hidden = false
         
         didPlayerWin()
-        
-//        questionField.text = "Woohoo!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
         
     }
     
 
     
     // MARK: Helper Methods
+//    
+//    func loadNextRoundWithDelay(seconds seconds: Int) {
+//        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
+//        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
+//        // Calculates a time value to execute the method given current time and delay
+//        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, delay)
+//    
+//        // Executes the nextRound method at the dispatch time on the main queue
+//        dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+//            self.questionsAsked += 1
+//            self.hideOptionButtons(true)
+//            self.showAnswerButton.hidden = true
+//            self.resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
+//            self.resultField.text = "Sorry, you ran out of time!"
+////            self.showNextQuestion()
+//        }
+//    }
     
     func hideOptionButtons(boolean: Bool) {
         let options: [UIButton] = [option1Button, option2Button, option3Button, option4Button]

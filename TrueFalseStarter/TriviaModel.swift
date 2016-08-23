@@ -11,6 +11,7 @@ import GameKit
 // globalIndex
 var indexOfSelectedTriviaSet: Int = 0
 var usedTriviaSets = [Int]()
+var count: Int = 0
 
 
 
@@ -21,7 +22,6 @@ struct Trivia {
     let answer: String
     
 }
-
 
 
 let triviaSet1 = Trivia(question: "This was the only US President to serve more than two consecutive terms.", options: ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"], answer: "Franklin D. Roosevelt")
@@ -46,38 +46,39 @@ let triviaSet10 = Trivia(question: "Which of these countries won the most medals
 
 let triviaCollection = [triviaSet1, triviaSet2, triviaSet3, triviaSet4, triviaSet5, triviaSet6, triviaSet7, triviaSet8, triviaSet9, triviaSet10]
 
-// This function randomely selects and returns a trivia set from the triviaCollection array
+// This function randomly selects and returns a trivia set from the triviaCollection array
+
 
 
 func generateTrivia() -> Trivia {
+//    count += 1
     
-    
-    // All Items in Trivia Collection Used
+//    if (count == 1 && usedTriviaSets.count == 1) {
+//        usedTriviaSets.removeAll()
     
     if (usedTriviaSets.count == triviaCollection.count) {
         
         // Resetting array of usedTriviaSets
         
         usedTriviaSets.removeAll()
-    
-    } else if (usedTriviaSets.count == 0) {
-        
-        indexOfSelectedTriviaSet = GKRandomSource.sharedRandom().nextIntWithUpperBound(triviaCollection.count)
-        
-//        usedTriviaSets.append(indexOfSelectedTriviaSet)
+//        count = 0
         
     } else if (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
         
         while (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
             
             indexOfSelectedTriviaSet = GKRandomSource.sharedRandom().nextIntWithUpperBound(triviaCollection.count)
-        
+            
         }
+        
+//        usedTriviaSets.append(indexOfSelectedTriviaSet)
+//        let triviaSelection = triviaCollection[indexOfSelectedTriviaSet]
         
     }
     
     usedTriviaSets.append(indexOfSelectedTriviaSet)
     let triviaSelection = triviaCollection[indexOfSelectedTriviaSet]
+    print(usedTriviaSets)
     
     return triviaSelection
     
