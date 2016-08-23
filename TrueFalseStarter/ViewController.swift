@@ -54,11 +54,13 @@ class ViewController: UIViewController {
     }
 
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+   
     
     @IBAction func checkAnswer(sender: UIButton) {
         
@@ -71,7 +73,6 @@ class ViewController: UIViewController {
         resetTimer()
         
         // Check if selected option matches the answer
-        
         if (sender === option1Button &&  option1Button.currentTitle == correctAnswer) ||
             (sender === option2Button && option2Button.currentTitle == correctAnswer) ||
             (sender === option3Button && option3Button.currentTitle == correctAnswer) ||
@@ -97,6 +98,7 @@ class ViewController: UIViewController {
     }
     
     
+    
     // This function allows user to view answer if they answered incorrectly (Optional)
     
     @IBAction func showAnswer() {
@@ -117,6 +119,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    
     
     
     // This function handles continuation of the game
@@ -146,13 +149,14 @@ class ViewController: UIViewController {
     
     
     
-    // This function resets all game setting and starts a new round automatically
+    // This function resets all game settings and starts a new round automatically
     
     @IBAction func playAgain() {
         
         // resetting display settings
         hideOptionButtons(false)
         displayScoreLabel.text = ""
+        questionField.hidden = false
         nextQuestionButton.hidden = false
         
         // resetting tracking settings along w/ timer
@@ -164,7 +168,7 @@ class ViewController: UIViewController {
         self.showNextQuestion()
     }
     
-    
+   
     
     func startTimer() {
         
@@ -173,7 +177,8 @@ class ViewController: UIViewController {
     }
     
     
-    // This function acts as a counter — utilized by the startTimer function
+    
+    // This function acts as a counter — utilized by the startTimer function above
     
     func timerAction() {
         
@@ -193,6 +198,7 @@ class ViewController: UIViewController {
     }
     
     
+    
     // MARK: Helper Methods
     
     
@@ -207,7 +213,7 @@ class ViewController: UIViewController {
     
     
     
-    // This function will stop timer and notify user of time running out.
+    // This function will stop timer and notify user of time running out — they are not able to select any options at this point
     
     func timesUp() {
         
@@ -221,6 +227,7 @@ class ViewController: UIViewController {
         resultField.text = "Sorry, you ran out of time!"
     }
 
+    
     
     // This function notifies user if they won or lost
     
@@ -241,16 +248,16 @@ class ViewController: UIViewController {
             displayScoreLabel.text = "Sorry, you only got \(correctAnswers) out of \(questionsPerRound) correct.\n Better luck next time!"
         
         } else {
-            
+
             // User Passed
             gameSounds.playWinnerSound()
             displayScoreLabel.text = "Nice! You got \(correctAnswers) out of \(questionsPerRound) correct!"
         }
     }
+   
     
     
-    
-    // This function controls the display of the Option Buttons
+    // This function grabs the options from the Current Trivia Set and sets them on the buttons for the user to select
     
     func displayOptions() {
         
@@ -264,23 +271,27 @@ class ViewController: UIViewController {
     }
     
     
+    
     // This displays user's final score once game ends
     
     func displayScore() {
         
-        // Hide all buttons
+        // Hide all buttons and labels
         hideOptionButtons(true)
         nextQuestionButton.hidden = true
         showAnswerButton.hidden = true
+        questionField.hidden = true
         
         // Display Play Again button
         playAgainButton.hidden = false
         
         // Calls function to Display Results
         didPlayerWin()
-        
     }
 
+    
+    
+    // This function controls the visibily of the Option Buttons
     
     func hideOptionButtons(boolean: Bool) {
         
@@ -292,6 +303,9 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    
+    // This function resets any styling or settings on the Option Buttons
     
     func resetOptionButtonDisplay() {
         

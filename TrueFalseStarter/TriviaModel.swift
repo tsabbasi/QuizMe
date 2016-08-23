@@ -11,21 +11,15 @@ import GameKit
 // global variables
 
 var indexOfSelectedTriviaSet: Int = 0
-
 var usedTriviaSets = [Int]()
-
 var count: Int = 0
-
 
 
 struct Trivia {
     
     // Each Trivia consists of these items.
-    
     let question: String
-    
     var options: [String]
-    
     let answer: String
     
 }
@@ -54,7 +48,6 @@ let triviaSet10 = Trivia(question: "Which of these countries won the most medals
 
 
 // Collection of Trivia Instances
-
 let triviaCollection = [triviaSet1, triviaSet2, triviaSet3, triviaSet4, triviaSet5, triviaSet6, triviaSet7, triviaSet8, triviaSet9, triviaSet10]
 
 
@@ -65,16 +58,15 @@ func generateTrivia() -> Trivia {
     
     count += 1
     
-    // Resetting array of usedTriviaSets
+    // This condition resets the array of usedTriviaSets once all Trivia Sets have been used
     
     if (usedTriviaSets.count == triviaCollection.count) {
 
         usedTriviaSets.removeAll()
-        
         count = 0
     
     // Trivia generated before AND after app loads — this condition avoids generation of an extra question
-        
+
     } else if (count == 2 && usedTriviaSets.count == 1) {
         
         usedTriviaSets.removeAll()
@@ -91,7 +83,6 @@ func generateTrivia() -> Trivia {
     }
     
     usedTriviaSets.append(indexOfSelectedTriviaSet)
-    
     let triviaSelection = triviaCollection[indexOfSelectedTriviaSet]
     
     return triviaSelection
