@@ -70,6 +70,8 @@ class ViewController: UIViewController {
         // Set correctAnswer to the current Trivia Set's answer
         let correctAnswer = currentTrivia.answer
         
+        nextQuestionButton.hidden = false
+        
         resetTimer()
         
         // Check if selected option matches the answer
@@ -99,7 +101,7 @@ class ViewController: UIViewController {
     
     
     
-    // This function allows user to view answer if they answered incorrectly (Optional)
+    // Allows user to view answer if they answered incorrectly (Optional)
     
     @IBAction func showAnswer() {
         
@@ -141,6 +143,7 @@ class ViewController: UIViewController {
             questionField.text = currentTrivia.question
             resultField.text = ""
             displayOptions()
+            nextQuestionButton.hidden = true
             playAgainButton.hidden = true
             showAnswerButton.hidden = true
             startTimer()
@@ -149,7 +152,7 @@ class ViewController: UIViewController {
     
     
     
-    // This function resets all game settings and starts a new round automatically
+    // Resets all game settings and starts a new round automatically
     
     @IBAction func playAgain() {
         
@@ -173,12 +176,12 @@ class ViewController: UIViewController {
     func startTimer() {
         
         timerLabel.hidden = false
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
     
     
     
-    // This function acts as a counter — utilized by the startTimer function above
+    // Timer Counter — utilized by the startTimer function above
     
     func timerAction() {
         
@@ -213,16 +216,20 @@ class ViewController: UIViewController {
     
     
     
-    // This function will stop timer and notify user of time running out — they are not able to select any options at this point
+    // User is out of time — Stops timer and notifies user to move to next question (the current question is marked incorrect)
     
     func timesUp() {
         
-        // Question marked as wrong
+        // Question marked as Incorrect
         questionsAsked += 1
+        
         timer.invalidate()
+        
         hideOptionButtons(true)
         timerLabel.hidden = true
         showAnswerButton.hidden = true
+        nextQuestionButton.hidden = false
+        
         resultField.textColor = UIColor.init(red: 253/255.0, green: 162/255.0, blue: 104/255.0, alpha: 1.0)
         resultField.text = "Sorry, you ran out of time!"
     }
