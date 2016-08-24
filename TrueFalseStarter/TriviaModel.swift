@@ -59,21 +59,18 @@ func generateTrivia() -> Trivia {
     count += 1
     
     // This condition resets the array of usedTriviaSets once all Trivia Sets have been used
-    
     if (usedTriviaSets.count == triviaCollection.count) {
 
         usedTriviaSets.removeAll()
         count = 0
     
     // Trivia generated before AND after app loads — this condition avoids generation of an extra question
-
     } else if (count == 2 && usedTriviaSets.count == 1) {
         
         usedTriviaSets.removeAll()
         ()
         
     // This condition checks against indexes already used to generate a new random number
-        
     } else if (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
         
         while (usedTriviaSets.contains(indexOfSelectedTriviaSet)) {
@@ -82,7 +79,9 @@ func generateTrivia() -> Trivia {
         }
     }
     
+    // Using this array to make sure there are no repeats!
     usedTriviaSets.append(indexOfSelectedTriviaSet)
+    
     let triviaSelection = triviaCollection[indexOfSelectedTriviaSet]
     
     return triviaSelection

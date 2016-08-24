@@ -16,7 +16,7 @@ var startGameSound: SystemSoundID = 0
 
 struct GameSoundModel {
     
-    // These Functions Load Game Sounds
+    // These Functions Loads Game Sounds
     
     func loadCorrectAnswerSound() {
         let pathToSoundFile = NSBundle.mainBundle().pathForResource("correct", ofType: "wav")
@@ -41,6 +41,7 @@ struct GameSoundModel {
         let soundURL = NSURL(fileURLWithPath: pathToSoundFile!)
         AudioServicesCreateSystemSoundID(soundURL, &winnerSound)
     }
+    
     
     // These Functions Play Game Sounds
     
