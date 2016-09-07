@@ -16,6 +16,7 @@
 		C43A5D281D668B0900F6F2DD /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = C43A5D271D668B0900F6F2DD /* correct.wav */; };
 		C43A5D2A1D66920E00F6F2DD /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = C43A5D291D66920E00F6F2DD /* lose.wav */; };
 		C455270A1D6C0256007FF288 /* cheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = C45527091D6C0256007FF288 /* cheer.wav */; };
+		C49CFD591D804DB00001564A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C49CFD581D804DB00001564A /* Default-568h@2x.png */; };
 		C4A2C9E51D66945100DDDE43 /* GameSoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A2C9E41D66945100DDDE43 /* GameSoundModel.swift */; };
 		C4E1947B1D64DAE0008B4949 /* TriviaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E1947A1D64DAE0008B4949 /* TriviaModel.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		C43A5D271D668B0900F6F2DD /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
 		C43A5D291D66920E00F6F2DD /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
 		C45527091D6C0256007FF288 /* cheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheer.wav; sourceTree = "<group>"; };
+		C49CFD581D804DB00001564A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C4A2C9E41D66945100DDDE43 /* GameSoundModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSoundModel.swift; sourceTree = "<group>"; };
 		C4E1947A1D64DAE0008B4949 /* TriviaModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriviaModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +52,7 @@
 		97093D2F1C913506001275BC = {
 			isa = PBXGroup;
 			children = (
+				C49CFD581D804DB00001564A /* Default-568h@2x.png */,
 				97093D3A1C913506001275BC /* QuizMe */,
 				97093D391C913506001275BC /* Products */,
 			);
@@ -146,6 +149,7 @@
 				C43A5D2A1D66920E00F6F2DD /* lose.wav in Resources */,
 				C455270A1D6C0256007FF288 /* cheer.wav in Resources */,
 				97093D431C913506001275BC /* Assets.xcassets in Resources */,
+				C49CFD591D804DB00001564A /* Default-568h@2x.png in Resources */,
 				97093D411C913506001275BC /* Main.storyboard in Resources */,
 				C43A5D281D668B0900F6F2DD /* correct.wav in Resources */,
 			);
