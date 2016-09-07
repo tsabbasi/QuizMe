@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		97093D381C913506001275BC /* TrueFalseStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrueFalseStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97093D381C913506001275BC /* QuizMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97093D3B1C913506001275BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97093D3D1C913506001275BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		97093D401C913506001275BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		97093D2F1C913506001275BC = {
 			isa = PBXGroup;
 			children = (
-				97093D3A1C913506001275BC /* TrueFalseStarter */,
+				97093D3A1C913506001275BC /* QuizMe */,
 				97093D391C913506001275BC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,12 +58,12 @@
 		97093D391C913506001275BC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				97093D381C913506001275BC /* TrueFalseStarter.app */,
+				97093D381C913506001275BC /* QuizMe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		97093D3A1C913506001275BC /* TrueFalseStarter */ = {
+		97093D3A1C913506001275BC /* QuizMe */ = {
 			isa = PBXGroup;
 			children = (
 				97093D3B1C913506001275BC /* AppDelegate.swift */,
@@ -79,15 +79,16 @@
 				C4E1947A1D64DAE0008B4949 /* TriviaModel.swift */,
 				C4A2C9E41D66945100DDDE43 /* GameSoundModel.swift */,
 			);
+			name = QuizMe;
 			path = TrueFalseStarter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		97093D371C913506001275BC /* TrueFalseStarter */ = {
+		97093D371C913506001275BC /* QuizMe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 97093D4A1C913506001275BC /* Build configuration list for PBXNativeTarget "TrueFalseStarter" */;
+			buildConfigurationList = 97093D4A1C913506001275BC /* Build configuration list for PBXNativeTarget "QuizMe" */;
 			buildPhases = (
 				97093D341C913506001275BC /* Sources */,
 				97093D351C913506001275BC /* Frameworks */,
@@ -97,9 +98,9 @@
 			);
 			dependencies = (
 			);
-			name = TrueFalseStarter;
+			name = QuizMe;
 			productName = TrueFalseStarter;
-			productReference = 97093D381C913506001275BC /* TrueFalseStarter.app */;
+			productReference = 97093D381C913506001275BC /* QuizMe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -117,7 +118,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 97093D331C913506001275BC /* Build configuration list for PBXProject "TrueFalseStarter" */;
+			buildConfigurationList = 97093D331C913506001275BC /* Build configuration list for PBXProject "QuizMe" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -130,7 +131,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				97093D371C913506001275BC /* TrueFalseStarter */,
+				97093D371C913506001275BC /* QuizMe */,
 			);
 		};
 /* End PBXProject section */
@@ -276,7 +277,7 @@
 				INFOPLIST_FILE = TrueFalseStarter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.TrueFalseStarter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = QuizMe;
 			};
 			name = Debug;
 		};
@@ -287,14 +288,14 @@
 				INFOPLIST_FILE = TrueFalseStarter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.TrueFalseStarter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = QuizMe;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		97093D331C913506001275BC /* Build configuration list for PBXProject "TrueFalseStarter" */ = {
+		97093D331C913506001275BC /* Build configuration list for PBXProject "QuizMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97093D481C913506001275BC /* Debug */,
@@ -303,7 +304,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		97093D4A1C913506001275BC /* Build configuration list for PBXNativeTarget "TrueFalseStarter" */ = {
+		97093D4A1C913506001275BC /* Build configuration list for PBXNativeTarget "QuizMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97093D4B1C913506001275BC /* Debug */,

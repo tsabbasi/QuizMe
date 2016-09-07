@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "97093D371C913506001275BC"
-               BuildableName = "TrueFalseStarter.app"
-               BlueprintName = "TrueFalseStarter"
-               ReferencedContainer = "container:TrueFalseStarter.xcodeproj">
+               BuildableName = "QuizMe.app"
+               BlueprintName = "QuizMe"
+               ReferencedContainer = "container:QuizMe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97093D371C913506001275BC"
-            BuildableName = "TrueFalseStarter.app"
-            BlueprintName = "TrueFalseStarter"
-            ReferencedContainer = "container:TrueFalseStarter.xcodeproj">
+            BuildableName = "QuizMe.app"
+            BlueprintName = "QuizMe"
+            ReferencedContainer = "container:QuizMe.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97093D371C913506001275BC"
-            BuildableName = "TrueFalseStarter.app"
-            BlueprintName = "TrueFalseStarter"
-            ReferencedContainer = "container:TrueFalseStarter.xcodeproj">
+            BuildableName = "QuizMe.app"
+            BlueprintName = "QuizMe"
+            ReferencedContainer = "container:QuizMe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97093D371C913506001275BC"
-            BuildableName = "TrueFalseStarter.app"
-            BlueprintName = "TrueFalseStarter"
-            ReferencedContainer = "container:TrueFalseStarter.xcodeproj">
+            BuildableName = "QuizMe.app"
+            BlueprintName = "QuizMe"
+            ReferencedContainer = "container:QuizMe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
