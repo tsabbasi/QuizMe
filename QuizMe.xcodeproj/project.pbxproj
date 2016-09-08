@@ -82,8 +82,7 @@
 				C4E1947A1D64DAE0008B4949 /* TriviaModel.swift */,
 				C4A2C9E41D66945100DDDE43 /* GameSoundModel.swift */,
 			);
-			name = QuizMe;
-			path = TrueFalseStarter;
+			path = QuizMe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,9 +277,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = TrueFalseStarter/Info.plist;
+				INFOPLIST_FILE = QuizMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.TrueFalseStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.QuizMe;
 				PRODUCT_NAME = QuizMe;
 			};
 			name = Debug;
@@ -289,9 +288,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = TrueFalseStarter/Info.plist;
+				INFOPLIST_FILE = QuizMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.TrueFalseStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.QuizMe;
 				PRODUCT_NAME = QuizMe;
 			};
 			name = Release;
